@@ -10,3 +10,42 @@ project(CalcPostFix CXX)
 file(GLOB cal_lib_SRC
     “Library/*.cpp”
 )
+
+add_library(calcLib
+    ${calc_lib_SRC}
+)
+
+#Evaluation program
+file(GLOB eval_SRC
+    “Eval/*.cpp”
+)
+
+add_executable(calc
+    ${eval_SRC}
+)
+
+target_link_libraries(calc calcLib)
+
+#SExpr Program
+file(GLOB sexpr_SRC
+    “SExpr/*.cpp”
+)
+
+add_executable(calc2sexpr
+    ${sexpr_SRC}
+)
+
+target_link_libraries(calc2sexpr calcLib)
+
+#PostFix Program
+file(GLOB post_SRC
+    “PostFix/*.cpp”
+)
+
+add_executable(calc2post
+    ${post_SRC}
+)
+
+target_link_libraries(calc2post calcLib)
+
+ser(CMAKE_CXX_FLAGS “-Wall -std=c++11”)
