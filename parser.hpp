@@ -1,4 +1,5 @@
 // Tyler Harbert
+// header file for the calculator parse class
 
 #ifndef PARSER_HPP
 #define PARSER_HPP

@@ -1,4 +1,5 @@
 // Tyler Harbert
+// code file for the functions of the parser class
 
 #include "parser.hpp"
 
