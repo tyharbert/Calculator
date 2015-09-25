@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.3)
+
+# project declarations
+project(CalcLib CXX)
+project(CalcEval CXX)
+project(CalcSExpr CXX)
+project(CalcPostFix CXX)
+
+# calculator library
+file(GLOB cal_lib_SRC
+    “Library/*.cpp”
+)
