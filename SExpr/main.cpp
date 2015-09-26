@@ -1,7 +1,7 @@
 // Tyler Harbert
 
 #include <iostream>
-#include "parser.hpp"
+#include "../Library/parser.hpp"
 
 using namespace std;
 
@@ -17,6 +17,8 @@ int main()
     // pass the evaluator class to the
     // root node of the AST's accept function
     expression->accept(sexpr);
+    
+    cout << endl;
 
     return 0;
 }

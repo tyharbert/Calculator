@@ -1,7 +1,7 @@
 // Tyler Harbert
 
 #include <iostream>
-#include "parser.hpp"
+#include "../Library/parser.hpp"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ int main()
     expression->accept(eval);
 
     // print result
-    eval->result;
+    cout << eval.result << endl << endl;
 
     return 0;
 }

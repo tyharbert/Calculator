@@ -31,7 +31,7 @@ struct Eval:Visit {
 // S-Expression Class
 // This class uses the visitor pattern to visit each node of the AST. The operator is printed before the digits
 // in each of the operator classes.
-struct S_Exper:Visit {
+struct S_Expr:Visit {
     void visit(Dig const* e) { std::cout << e->value << " "; };
     void visit(Add const* e) { std::cout << "(+ "; e->e1->accept(*this); e->e2->accept(*this); std::cout << "\b) "; };
     void visit(Sub const* e) { std::cout << "(- "; e->e1->accept(*this); e->e2->accept(*this); std::cout << "\b) "; };
