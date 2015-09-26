@@ -6,7 +6,7 @@ Run CMake on the entire Calculator root directory, then run make.
 Execution Instructions
 ----------------------
 
-The programs names are calc (for evaluating the expression), calc2sexpr (for an s-expression) and calc2post (for post fix notation).  After the programs are built you can run them with and then enter your expression like so:
+The programs names are *calc* (for evaluating the expression), *calc2sexpr* (for an s-expression) and *calc2post* (for post fix notation).  After the programs are built you can run them with and then enter your expression like so:
 ````
 ./calc
 4 + 5 - 2
