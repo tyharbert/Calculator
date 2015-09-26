@@ -1,12 +1,14 @@
 // Tyler Harbert
 // code file for the functions of the parser class
+// E -> E + F | E - F | F
+// F -> F * T | F / T | F % T | T
+// T -> D | (E)
+// D -> [0-9]
 
 #include "parser.hpp"
 
-    // parser class constructor
+    // parser class constructor, gets the users input and initializes look ahead.
     Parser::Parser () {
-        // loop through the users input until you have the first
-        // character that is not a whitespace and make that the lookahead
         la_pos = 0;
         getline(std::cin,input);
         while (isspace(input[la_pos])) {
@@ -26,9 +28,9 @@
         lookahead = input[la_pos];
     }
 
-    // expression node parse
+    // Implements the following part of the grammar
+    // E -> E + F | E - F | F
     Expr* Parser::E() {
-        // call the
         Expr* e1 = F();
         while (true){
             if(lookahead == '+'){
@@ -46,7 +48,8 @@
         return e1;
     }
 
-    // factor node parse
+    // Implements the following part of the grammar
+    // F -> F * T | F / T | F % T | T
     Expr* Parser::F() {
         Expr* e1 = T();
         while (true){
@@ -69,7 +72,8 @@
         return e1;
     }
 
-    // term node parse
+    // Implements the following part of the grammar
+    // T -> D | (E)
     Expr* Parser::T() {
         while (true){
             if (lookahead == '0') { Next(); return new Dig(0);}

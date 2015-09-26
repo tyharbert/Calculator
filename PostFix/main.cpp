@@ -7,14 +7,14 @@ using namespace std;
 
 int main()
 {
-    // create a parser class
+    // create a parser object
     Parser* parser = new Parser();
     // create an AST using the parser
     Expr* expression = parser->E();
-    // create and evaluator class
+    // create a post fix object
     PostFix pfix;
 
-    // pass the evaluator class to the
+    // pass the post fix object to the
     // root node of the AST's accept function
     expression->accept(pfix);
     

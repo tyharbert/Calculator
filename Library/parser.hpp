@@ -1,5 +1,9 @@
 // Tyler Harbert
 // header file for the calculator parse class
+// E -> E + F | E - F | F
+// F -> F * T | F / T | F % T | T
+// T -> D | (E)
+// D -> [0-9]
 
 #ifndef PARSER_HPP
 #define PARSER_HPP
@@ -8,8 +12,7 @@
 #include <iostream>
 #include "eval.hpp"
 
-// the parser class is used to evaluate the
-// user input into the abstract syntax tree format.
+// the parser class uses the grammar to produce the Abstract Syntax Tree.
 struct Parser {
     // holds the users input
     std::string input;
@@ -22,11 +25,12 @@ struct Parser {
     Parser ();
     // gets the next look ahead value
     void Next();
-    // expression node parse function
+    
+    // E -> E + F | E - F | F
     Expr* E();
-    // factor node parse function
+    // F -> F * T | F / T | F % T | T
     Expr* F();
-    // term node parse function
+    // T -> D | (E)
     Expr* T();
 };
 

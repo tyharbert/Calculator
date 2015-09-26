@@ -1,6 +1,12 @@
 // Tyler Harbert
 // header file for the class representation of the
 // Abstract Syntax Tree.
+// e := e1 + e2
+//      e1 - e2
+//      e1 * e2
+//      e1 / e2
+//      e1 % e2
+//      [0-9]
 
 #ifndef AST_HPP
 #define AST_HPP
@@ -25,21 +31,20 @@ struct Visit {
     virtual void visit(Mod const* e) = 0;
 };
 
-// expression class, all nodes of the AST will inherit from
-// this class
+// expression class, all nodes of the AST will inherit from this class
 struct Expr {
     virtual ~Expr() {}
     virtual void accept(Visit& v) const = 0;
 };
 
-// digit class, all leaf nodes will be of this type
+// digit class, [0-9]
 struct Dig:Expr {
     int value;
     Dig(int value): value(value) {}
     void accept(Visit& v) const { v.visit(this); };
 };
 
-// add class, holds two expression pointers until evaluation
+// add class, e1 + e2
 struct Add:Expr {
     Expr* e1;
     Expr* e2;
@@ -47,7 +52,7 @@ struct Add:Expr {
     void accept(Visit& v) const { v.visit(this); };
 };
 
-// subtract class, holds two expression pointers until evaluation
+// subtract class, e1 - e2
 struct Sub:Expr {
     Expr* e1;
     Expr* e2;
@@ -55,7 +60,7 @@ struct Sub:Expr {
     void accept(Visit& v) const { v.visit(this); };
 };
 
-// multiply class, holds two expression pointers until evaluation
+// multiply class, e1 * e2
 struct Mul:Expr {
     Expr* e1;
     Expr* e2;
@@ -63,7 +68,7 @@ struct Mul:Expr {
     void accept(Visit& v) const { v.visit(this); };
 };
 
-// divide class, holds two expression pointers until evaluation
+// divide class, e1 / e2
 struct Div:Expr {
     Expr* e1;
     Expr* e2;
@@ -71,7 +76,7 @@ struct Div:Expr {
     void accept(Visit& v) const { v.visit(this); };
 };
 
-// modulus class, holds two expression pointers until evaluation
+// modulus class, e1 % e2
 struct Mod:Expr {
     Expr* e1;
     Expr* e2;

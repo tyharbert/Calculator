@@ -10,9 +10,9 @@
 
 // Evaluation class
 // This class uses the visitor pattern to traverse from the root node to the
-// digit nodes to get the digit values. Within the operator classes the result
-// must be saved into a temporary integer after the first except so that it is not
-// overwritten by the value of the next.
+// digit nodes to get the digit values. Within the operator classes, the result
+// must be saved into a temporary integer after the first accept, so that it is not
+// overwritten by the value of the next digit.
 struct Eval:Visit {
     Eval () {
         result = 0;
@@ -29,8 +29,8 @@ struct Eval:Visit {
 };
 
 // S-Expression Class
-// This class uses the visitor pattern to visit each node of the AST. The operator is printed before the digits
-// in each of the operator classes.
+// This class uses the visitor pattern to visit each node of the AST. The operator
+// is printed before the digits in each of the operator classes.
 struct S_Expr:Visit {
     void visit(Dig const* e) { std::cout << e->value << " "; };
     void visit(Add const* e) { std::cout << "(+ "; e->e1->accept(*this); e->e2->accept(*this); std::cout << "\b) "; };
@@ -41,8 +41,8 @@ struct S_Expr:Visit {
 };
 
 // Postfix Class
-// This class uses the visitor pattern to visit each node in the AST. The operator is printed after the digits
-// in each of the operator classes.
+// This class uses the visitor pattern to visit each node in the AST. The operator
+// is printed after the digits in each of the operator classes.
 struct PostFix:Visit {
     void visit(Dig const* e) { std::cout << e->value << " "; };
     void visit(Add const* e) { std::cout << "("; e->e1->accept(*this); e->e2->accept(*this); std::cout << "+)"; };
