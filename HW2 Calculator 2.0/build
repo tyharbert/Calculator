@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /Users/harbertt11/_The\ University\ of\ Akron/FALL\ 2015/Compiler\ Design/HW2\ Calculator\ 2.0/bin
+cmake /Users/harbertt11/_The\ University\ of\ Akron/FALL\ 2015/Compiler\ Design/HW2\ Calculator\ 2.0
+make
