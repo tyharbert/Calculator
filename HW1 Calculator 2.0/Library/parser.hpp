@@ -24,14 +24,14 @@ struct Parser {
     // parser class constructor
     Parser ();
     // gets the next look ahead value
-    void Next();
+    void next();
     
     // E -> E + F | E - F | F
-    Expr* E();
+    Expr* expression();
     // F -> F * T | F / T | F % T | T
-    Expr* F();
+    Expr* factor();
     // T -> D | (E)
-    Expr* T();
+    Expr* term();
 };
 
 #endif

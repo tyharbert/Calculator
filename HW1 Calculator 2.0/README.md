@@ -1,7 +1,7 @@
 Build Instructions
 ------------------
 
-Run CMake on the entire Calculator root directory, then run make.
+Run CMake on this directory, then run make.
 
 Execution Instructions
 ----------------------

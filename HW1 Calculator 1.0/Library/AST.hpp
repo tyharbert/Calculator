@@ -13,7 +13,6 @@
 
 // forward declarations of AST classes to allow
 // for the Visit class to be declared
-struct Exp;
 struct Dig;
 struct Add;
 struct Sub;

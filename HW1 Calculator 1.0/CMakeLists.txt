@@ -9,6 +9,7 @@ project(calc2post CXX)
 # calculator library
 add_library(calcLib STATIC
     Library/parser.cpp
+    Library/eval.cpp
 )
 
 #Evaluation program
