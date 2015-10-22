@@ -1,7 +1,7 @@
 // Tyler Harbert
 
 #include <iostream>
-#include "../Library/parser.hpp"
+#include "../Library/comp_lib.hpp"
 
 using namespace std;
 
@@ -13,9 +13,8 @@ int main()
         // create an AST using the parser
         Expr* expr = parser->expression();
 
-        // print post fix notation for the expression
-        post_fix(expr);
-        cout << endl;
+        // print result
+        cout << eval(expr) << endl << endl;
     }
     catch (exception& e){
         cout << "Standard exception: " << e.what() << endl;

@@ -1,28 +1,19 @@
 cmake_minimum_required(VERSION 3.3)
 
 # project declarations
-project(calcLib CXX)
+project(calc_lib CXX)
 project(calc CXX)
-project(calc2sexpr CXX)
-project(calc2post CXX)
 
-# calculator library
-add_library(calcLib STATIC
-    Library/parser.cpp
-    Library/eval.cpp
+# compiler library
+file(GLOB calc_lib_src
+    "Library/*.cpp"
 )
 
-#Evaluation program
-add_executable(calc Eval/main.cpp)
+add_library(calc_lib STATIC
+    ${calc_lib_src}
+)
 
-target_link_libraries(calc LINK_PUBLIC calcLib)
+# calculator program
+add_executable(calc Exe/main.cpp)
 
-#SExpr Program
-add_executable(calc2sexpr SExpr/main.cpp)
-
-target_link_libraries(calc2sexpr LINK_PUBLIC calcLib)
-
-#PostFix Program
-add_executable(calc2post PostFix/main.cpp)
-
-target_link_libraries(calc2post LINK_PUBLIC calcLib)
+target_link_libraries(calc LINK_PUBLIC calc_lib)

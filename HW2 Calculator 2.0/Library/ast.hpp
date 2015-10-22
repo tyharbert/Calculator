@@ -1,12 +1,15 @@
 // Tyler Harbert
-// header file for the class representation of the
-// Abstract Syntax Tree.
-// e := e1 + e2
-//      e1 - e2
-//      e1 * e2
-//      e1 / e2
-//      e1 % e2
-//      [0-9]
+/*
+ header file for the class representation of the
+ Abstract Syntax Tree.
+ 
+ e := e1 + e2
+      e1 - e2
+      e1 * e2
+      e1 / e2
+      e1 % e2
+      [0-9]
+*/
 
 #ifndef AST_HPP
 #define AST_HPP

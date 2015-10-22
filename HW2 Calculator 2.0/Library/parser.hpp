@@ -1,9 +1,12 @@
 // Tyler Harbert
-// header file for the calculator parse class
-// E -> E + F | E - F | F
-// F -> F * T | F / T | F % T | T
-// T -> D | (E)
-// D -> [0-9]
+/*
+ header file for the calculator parse class
+ 
+ E -> E + F | E - F | F
+ F -> F * T | F / T | F % T | T
+ T -> D | (E)
+ D -> [0-9]
+*/
 
 #ifndef PARSER_HPP
 #define PARSER_HPP
