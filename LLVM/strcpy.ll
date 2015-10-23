@@ -12,26 +12,42 @@ define i32 @main {
     ret 0
 }
 
-define i32 @strlen(i8* %str){
+define i8* @strcpy(i8* %dest, i8* %src){
 
+    ; get str length
+    %len = call i32 @strlen(i8* %src)
+    ; if string length is zero then end
+    %1 = icmp i32 eq %len, 0
+    br i1 %1, label %end, label %cont
+
+cont:
+    ; allocate dest string
+    %dest = alloca [%len x i8]
+
+    ; initialize an iterator at 0
     %offset = alloc i32
     store i32 0, i32* %offset
     
 condit:
+    ; store src char in dest
     %idx = load i32* %offset
-    %str = getelementptr inbounds i8* %str, i32 %idx
-    %char = load i8* %str
+    %str1 = getelementptr inbounds i8* %src, i32 %idx
+    %char = load i8* %str1
+    %str2 = getelementptr inbounds i8* %dest, i32 %idx
+    store i8 %char, i8* %str2
     
-    %res = icmp eq i8 %char, 0
-    br i1 %res, label %end, label %body
+    ; check if src char is NULL
+    %1 = icmp eq i8 %char, 0
+    br i1 %1, label %end, label %body
     
 body:
+    ; increment the offset variable by 1
     %cur_offset = load i32* %offset
     %new_offset = add nsw i32 %cur_offset, 1
     store i32 %new_offset, i32* %offset
     br label %condit
     
 end:
-    %ans = load i32* %len
-    ret i32 %ans
+    ; return ptr to copy
+    ret i8 %src
 }

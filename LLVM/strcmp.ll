@@ -41,22 +41,26 @@ endcheck:
     br i1 %3, label %retzero, label %body
     
 body:
+    ; increment the offset variable by 1
     %cur_offset = load i32* %offset
     %new_offset = add nsw i32 %cur_offset, 1
     store i32 %new_offset, i32* %offset
     br label %condit
     
 retneg:
+    ; return -1
     %ans1 = alloc i32
     store i32 -1, i32* %ans1
     ret i32 %ans1
 
 retpos:
+    ; return 1
     %ans2 = alloc i32
     store i32 1, i32* %ans2
     ret i32 %ans2
 
 retzero:
+    ; return 0
     %ans3 = alloc i32
     store i32 0, i32* %ans3
     ret i32 %ans3
