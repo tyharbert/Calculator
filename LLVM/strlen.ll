@@ -14,26 +14,28 @@ define i32 @main {
 
 define i32 @strlen(i8* %str){
     
-    ; this is our iterator
+    ; initialize an iterator at 0
     %offset = alloc i32
-    ; store 0 in iterator
     store i32 0, i32* %offset
     
-condit:
+condi
+    ; load the current character
     %idx = load i32* %offset
     %str1 = getelementptr inbounds i8* %str, i32 %idx
     %char = load i8* %str1
     
+    ; check if the current char is NULL
     %res = icmp eq i8 %char, 0
     br i1 %res, label %end, label %body
     
 body:
+    ; increment the offset variable by 1
     %cur_offset = load i32* %offset
     %new_offset = add nsw i32 %cur_offset, 1
     store i32 %new_offset, i32* %offset
     br label %condit
     
 end:
-    %ans = load i32* %len
-    ret i32 %ans
+    ; return the index that the NULL was found at
+    ret i32 %idx
 }
