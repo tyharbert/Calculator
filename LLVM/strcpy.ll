@@ -17,7 +17,7 @@ define i8* @strcpy(i8* %dest, i8* %src){
     ; get str length
     %len = call i32 @strlen(i8* %src)
     ; if string length is zero then end
-    %1 = icmp i32 eq %len, 0
+    %1 = icmp eq i32 %len, 0
     br i1 %1, label %end, label %cont
 
 cont:
