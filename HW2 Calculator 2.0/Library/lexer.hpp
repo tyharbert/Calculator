@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <cassert>
 #include "token.hpp"
 
 struct Lexer {
@@ -22,10 +23,34 @@ struct Lexer {
     void consume_whitespace();
     char get();
     char peek();
+    void digit();
     
     // Token returning parsing functions
     Token scan();
+    Token lparen();
+    Token lparen();
+    Token rparen();
+    Token plus();
+    Token minus();
+    Token star();
+    Token slash();
+    Token percent();
+    Token excl();
+    Token gt();
+    Token lt();
+    Token eq();
+    Token and();
+    Token or();
+    Token integer();
+    Token boolean();
+    Token error();
     
+    // all predefined language symbols
+    Token symbol();
+    // called at the end of parsing an integer
+    Token on_integer();
+    // called at the end of parsing a predefined symbol
+    Token on_token();
 };
 
 #endif

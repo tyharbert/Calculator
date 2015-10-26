@@ -66,5 +66,103 @@ Token Lexer::scan(){
         case '8':
         case '9':
             return integer();
+            
+        case 't':
+        case 'f':
+            return boolean();
+            
+        default:
+            return error();
     }
+}
+
+
+// all predefined language symbols
+
+Token Lexer::lparen(){
+    return symbol();
+}
+
+Token Lexer::rparen(){
+    return symbol();
+}
+
+Token Lexer::plus(){
+    return symbol();
+}
+
+Token Lexer::minus(){
+    return symbol();
+}
+
+Token Lexer::star(){
+    return symbol();
+}
+
+Token Lexer::slash(){
+    return symbol();
+}
+
+Token Lexer::percent(){
+    return symbol();
+}
+
+Token Lexer::excl(){
+    // this is for !=
+    if (this->peek() == '=')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::gt(){
+    // this is for >=
+    if (this->peek() == '=')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::lt(){
+    // this is for <=
+    if (this->peek() == '=')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::eq(){
+    // this is for ==
+    if (this->peek() == '=')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::and(){
+    // this is for &&
+    if (this->peek() == '&')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::or(){
+    // this is for ||
+    if (this->peek() == '|')
+        this->get();
+    
+    return symbol();
+}
+
+Token Lexer::integer(){
+    
+}
+
+Token Lexer::boolean(){
+    
+}
+
+Token Lexer::error(){
+    
 }
