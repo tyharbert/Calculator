@@ -35,6 +35,7 @@ struct Lexer {
     char get();
     char peek(int = 0);
     void digit();
+    void multi_char();
     
     // Token returning parsing functions
     Token scan();
@@ -51,8 +52,7 @@ struct Lexer {
     Token eq();
     Token logical_and();
     Token logical_or();
-    Token boolean_true();
-    Token boolean_false();
+    Token boolean();
     Token integer();
     Token error();
     Token eof();

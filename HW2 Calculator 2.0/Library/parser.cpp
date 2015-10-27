@@ -1,3 +1,5 @@
+// getting int and bool value dynamic_cast<Int_Sym*>(t1.symbol)->value
+
 // Tyler Harbert
 // code file for the functions of the parser class
 // E -> E + F | E - F | F

@@ -57,8 +57,9 @@ Token Lexer::scan(){
         case '&': return logical_and();
         case '|': return logical_or();
         
-        case 't': return boolean_true();
-        case 'f': return boolean_false();
+        case 't':
+        case 'f':
+            return boolean();
             
         case '0':
         case '1':
@@ -108,77 +109,57 @@ Token Lexer::percent(){
     return symbol();
 }
 
+void Lexer::multi_char(){
+    while (!(isspace(this->peek(1)) || this->peek(1) == 0))
+        this->get();
+}
+
 Token Lexer::excl(){
     // this is for !=
-    if (this->peek() == '=')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
 Token Lexer::gt(){
     // this is for >=
-    if (this->peek(1) == '=')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
 Token Lexer::lt(){
     // this is for <=
-    if (this->peek(1) == '=')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
 Token Lexer::eq(){
     // this is for ==
-    if (this->peek(1) == '=')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
 Token Lexer::logical_and(){
     // this is for &&
-    if (this->peek(1) == '&')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
 Token Lexer::logical_or(){
     // this is for ||
-    if (this->peek(1) == '|')
-        this->get();
+    this->multi_char();
     
     return symbol();
 }
 
-Token Lexer::boolean_true(){
-    // this is for true
-    if (this->peek(1) == 'r')
-        this->get();
-    if (this->peek(1) == 'u')
-        this->get();
-    if (this->peek(1) == 'e')
-        this->get();
-    
-    return symbol();
-}
-
-Token Lexer::boolean_false(){
-    // this is for false
-    if (this->peek(1) == 'a')
-        this->get();
-    if (this->peek(1) == 'l')
-        this->get();
-    if (this->peek(1) == 's')
-        this->get();
-    if (this->peek(1) == 'e')
-        this->get();
-    
+Token Lexer::boolean(){
+    // this is for true or false
+    this->multi_char();
+        
     return symbol();
 }
 
@@ -199,7 +180,7 @@ Token Lexer::integer(){
 
 Token Lexer::error(){
     this->state = (int)error_flag;
-    std::cout << "There was an error parsing '" << this->peek() << "'";
+    std::cout << "There was an error lexing'" << this->peek() << "'";
     
     this->get();
     return Token(error_tok, new Symbol((int)error_tok));
