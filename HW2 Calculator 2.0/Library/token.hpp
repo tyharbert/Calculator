@@ -8,7 +8,8 @@
 // Token kinds
 enum Token_Kind
 {
-    error_tok = -1,
+    error_tok = -2,
+    eof_tok = -1,
     lparen_tok,
     rparen_tok,
     plus_tok,

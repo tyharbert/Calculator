@@ -9,6 +9,12 @@
 #include "token.hpp"
 #include "symbol.hpp"
 
+enum Lexer_States {
+    lexing_flag,
+    error_flag,
+    eof_flag
+};
+
 struct Lexer {
     // holds the user's input
     std::string input;
@@ -18,6 +24,8 @@ struct Lexer {
     unsigned int lookahead;
     // symbol table
     Symbol_Table* st;
+    // this contains the state of the lexer
+    int state;
 
     // lexer class constructor
     Lexer();
@@ -43,8 +51,9 @@ struct Lexer {
     Token eq();
     Token logical_and();
     Token logical_or();
+    Token boolean_true();
+    Token boolean_false();
     Token integer();
-    Token boolean();
     Token error();
     Token eof();
     

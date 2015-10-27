@@ -3,10 +3,11 @@
 #include "lexer.hpp"
 
 Lexer::Lexer(){
+    this->state = (int)lexing_flag;
     this->lookahead = 0;
     this->builder = "";
-    getline(std::cin,this->input);
     this->st = new Symbol_Table();
+    getline(std::cin,this->input);
 }
 
 // this function consumes all whitespace characters
@@ -55,6 +56,9 @@ Token Lexer::scan(){
         case '=': return eq();
         case '&': return logical_and();
         case '|': return logical_or();
+        
+        case 't': return boolean_true();
+        case 'f': return boolean_false();
             
         case '0':
         case '1':
@@ -67,11 +71,7 @@ Token Lexer::scan(){
         case '8':
         case '9':
             return integer();
-            
-        case 't':
-        case 'f':
-            return boolean();
-            
+        
         default:
             return error();
     }
@@ -156,24 +156,59 @@ Token Lexer::logical_or(){
     return symbol();
 }
 
-Token Lexer::integer(){
-    //TODO
+Token Lexer::boolean_true(){
+    // this is for true
+    if (this->peek(1) == 'r')
+        this->get();
+    if (this->peek(1) == 'u')
+        this->get();
+    if (this->peek(1) == 'e')
+        this->get();
+    
     return symbol();
 }
 
-Token Lexer::boolean(){
-    //TODO
+Token Lexer::boolean_false(){
+    // this is for false
+    if (this->peek(1) == 'a')
+        this->get();
+    if (this->peek(1) == 'l')
+        this->get();
+    if (this->peek(1) == 's')
+        this->get();
+    if (this->peek(1) == 'e')
+        this->get();
+    
     return symbol();
+}
+
+// this function gets a digit
+void Lexer::digit(){
+    assert(isdigit(this->peek()));
+    this->get();
+}
+
+// this function parses an integer
+Token Lexer::integer(){
+    digit();
+    while(isdigit(this->peek()))
+        digit();
+    
+    return on_integer();
 }
 
 Token Lexer::error(){
-    //TODO
-    return symbol();
+    this->state = (int)error_flag;
+    std::cout << "There was an error parsing '" << this->peek() << "'";
+    
+    this->get();
+    return Token(error_tok, new Symbol((int)error_tok));
 }
 
 Token Lexer::eof(){
-    //TODO
-    return symbol();
+    this->state = (int)eof_flag;
+    
+    return Token(eof_tok, new Symbol((int)eof_tok));
 }
 
 Token Lexer::symbol(){
@@ -182,6 +217,23 @@ Token Lexer::symbol(){
 }
 
 Token Lexer::on_token(){
-    Symbol* s;
-    return Token(1,s);
+    Symbol* sym = st->get(this->builder);
+    
+    // if the symbol is not found in the table throw an error
+    if (sym == nullptr){
+        std::string msg = "Symbol " + this->builder + " was not found in the symbol table.";
+        throw std::runtime_error(msg);
+    }
+    
+    this->builder = "";
+    
+    return Token(sym->token(), sym);
+}
+
+Token Lexer::on_integer(){
+  int n = stoi(builder);
+  Symbol* sym = st->put<Int_Sym>(builder, integer_tok, n);
+  builder = "";
+    
+  return Token(integer_tok, sym);
 }

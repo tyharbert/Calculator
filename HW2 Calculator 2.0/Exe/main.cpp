@@ -10,8 +10,9 @@ int main()
     try {
         Lexer* l = new Lexer();
         
-//        auto t = l->st->get("(");
-//        cout << t->token() << *t->spelling() << endl;
+//        auto t1 = l->scan();
+//        
+//        cout << dynamic_cast<Int_Sym*>(t1.symbol)->value + 4 << endl;
         
     }
     catch (exception& e){
