@@ -23,9 +23,10 @@ enum Token_Kind
     lteq_tok,
     eq_tok,
     noteq_tok,
-    and_tok,
-    or_tok,
-    integer_tok
+    logical_and_tok,
+    logical_or_tok,
+    integer_tok,
+    boolean_tok
 };
 
 // Token class

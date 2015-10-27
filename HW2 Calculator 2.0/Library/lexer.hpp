@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cassert>
 #include "token.hpp"
+#include "symbol.hpp"
 
 struct Lexer {
     // holds the user's input
@@ -15,6 +16,8 @@ struct Lexer {
     std::string builder;
     // contains the current index of the begining and end of a token
     unsigned int lookahead;
+    // symbol table
+    Symbol_Table* st;
 
     // lexer class constructor
     Lexer();
@@ -22,12 +25,11 @@ struct Lexer {
     // get and peek functions
     void consume_whitespace();
     char get();
-    char peek();
+    char peek(int = 0);
     void digit();
     
     // Token returning parsing functions
     Token scan();
-    Token lparen();
     Token lparen();
     Token rparen();
     Token plus();
@@ -39,11 +41,12 @@ struct Lexer {
     Token gt();
     Token lt();
     Token eq();
-    Token and();
-    Token or();
+    Token logical_and();
+    Token logical_or();
     Token integer();
     Token boolean();
     Token error();
+    Token eof();
     
     // all predefined language symbols
     Token symbol();

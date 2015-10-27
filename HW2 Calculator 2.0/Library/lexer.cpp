@@ -6,6 +6,7 @@ Lexer::Lexer(){
     this->lookahead = 0;
     this->builder = "";
     getline(std::cin,this->input);
+    this->st = new Symbol_Table();
 }
 
 // this function consumes all whitespace characters
@@ -29,8 +30,8 @@ char Lexer::get(){
 
 // this function gets the next character without changing the lookahead
 // position or builder string
-char Lexer::peek(){
-    return this->input[this->lookahead];
+char Lexer::peek(int i){
+    return this->input[this->lookahead + i];
 }
 
 // this function finds the next token to parse
@@ -52,8 +53,8 @@ Token Lexer::scan(){
         case '>': return gt();
         case '<': return lt();
         case '=': return eq();
-        case '&': return and();
-        case '|': return or();
+        case '&': return logical_and();
+        case '|': return logical_or();
             
         case '0':
         case '1':
@@ -117,7 +118,7 @@ Token Lexer::excl(){
 
 Token Lexer::gt(){
     // this is for >=
-    if (this->peek() == '=')
+    if (this->peek(1) == '=')
         this->get();
     
     return symbol();
@@ -125,7 +126,7 @@ Token Lexer::gt(){
 
 Token Lexer::lt(){
     // this is for <=
-    if (this->peek() == '=')
+    if (this->peek(1) == '=')
         this->get();
     
     return symbol();
@@ -133,36 +134,54 @@ Token Lexer::lt(){
 
 Token Lexer::eq(){
     // this is for ==
-    if (this->peek() == '=')
+    if (this->peek(1) == '=')
         this->get();
     
     return symbol();
 }
 
-Token Lexer::and(){
+Token Lexer::logical_and(){
     // this is for &&
-    if (this->peek() == '&')
+    if (this->peek(1) == '&')
         this->get();
     
     return symbol();
 }
 
-Token Lexer::or(){
+Token Lexer::logical_or(){
     // this is for ||
-    if (this->peek() == '|')
+    if (this->peek(1) == '|')
         this->get();
     
     return symbol();
 }
 
 Token Lexer::integer(){
-    
+    //TODO
+    return symbol();
 }
 
 Token Lexer::boolean(){
-    
+    //TODO
+    return symbol();
 }
 
 Token Lexer::error(){
-    
+    //TODO
+    return symbol();
+}
+
+Token Lexer::eof(){
+    //TODO
+    return symbol();
+}
+
+Token Lexer::symbol(){
+    this->get();
+    return this->on_token();
+}
+
+Token Lexer::on_token(){
+    Symbol* s;
+    return Token(1,s);
 }

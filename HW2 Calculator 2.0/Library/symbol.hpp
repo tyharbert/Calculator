@@ -13,9 +13,12 @@ class Symbol {
 private:
     std::string const* str;
     int token_kind;
+    
 public:
-    virtual ~Symbol();
+    //virtual ~Symbol();
     Symbol(int tk): token_kind(tk) {}
+    std::string const* spelling() const;
+    int token() const;
 };
 
 struct Int_Sym:Symbol{
@@ -26,7 +29,7 @@ struct Int_Sym:Symbol{
 
 struct Bool_Sym:Symbol{
     bool value;
-    
+
     Bool_Sym(int tk, bool v): Symbol(tk), value(v) {}
 };
 
@@ -35,7 +38,8 @@ private:
     std::unordered_map<std::string,Symbol*> map;
 
 public:
-    virtual ~Symbol_Table();
+    //virtual ~Symbol_Table();
+    Symbol_Table();
     void put(std::string const&, Symbol*);
     Symbol const* get(std::string const&) const;
 };
