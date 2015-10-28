@@ -9,11 +9,13 @@ int main()
 {
     try {
         Lexer* l = new Lexer();
+        TokenStream ts = l->lex();
         
-        auto t1 = l->scan();
-        cout << *t1.symbol->spelling() << endl;
-        
-//        cout << dynamic_cast<Int_Sym*>(t1.symbol)->value + 4 << endl;
+        Token t;
+        do {
+            t = ts.get();
+            cout << t.symbol->spelling() << endl;
+        }while(t.symbol->token() != (int)eof_tok);
         
     }
     catch (exception& e){

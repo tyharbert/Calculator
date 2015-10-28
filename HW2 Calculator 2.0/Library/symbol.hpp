@@ -19,7 +19,7 @@ private:
 public:
     virtual ~Symbol() {}
     Symbol(int tk): token_kind(tk) {}
-    std::string const* spelling() const;
+    std::string spelling() const;
     int token() const;
 };
 

@@ -4,8 +4,8 @@
 #include "token.hpp"
 
 // this returns the spelling
-std::string const* Symbol::spelling() const{
-    return this->str;
+std::string Symbol::spelling() const{
+    return *this->str;
 }
 
 // this returns the token kind
@@ -30,6 +30,7 @@ Symbol_Table::Symbol_Table(){
     this->put<Symbol>("==", eq_tok);
     this->put<Symbol>("!=", noteq_tok);
     this->put<Symbol>("&&", logical_and_tok);
+    this->put<Symbol>("||", logical_or_tok);
     this->put<Bool_Sym>("true", boolean_tok, true);
     this->put<Bool_Sym>("false", boolean_tok, false);
 }

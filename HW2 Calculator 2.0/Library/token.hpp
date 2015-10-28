@@ -10,24 +10,24 @@ enum Token_Kind
 {
     error_tok = -2,
     eof_tok = -1,
-    lparen_tok,
-    rparen_tok,
-    plus_tok,
-    minus_tok,
-    star_tok,
-    slash_tok,
-    percent_tok,
-    excl_tok,
-    gt_tok,
-    lt_tok,
-    gteq_tok,
-    lteq_tok,
-    eq_tok,
-    noteq_tok,
-    logical_and_tok,
-    logical_or_tok,
-    integer_tok,
-    boolean_tok
+    lparen_tok,//0
+    rparen_tok,//1
+    plus_tok,//2
+    minus_tok,//3
+    star_tok,//4
+    slash_tok,//5
+    percent_tok,//6
+    excl_tok,//7
+    gt_tok,//8
+    lt_tok,//9
+    gteq_tok,//10
+    lteq_tok,//11
+    eq_tok,//12
+    noteq_tok,//13
+    logical_and_tok,//14
+    logical_or_tok,//15
+    integer_tok,//16
+    boolean_tok//17
 };
 
 // Token class
@@ -36,6 +36,34 @@ struct Token {
     Symbol* symbol;
     
     Token(int tk, Symbol* s): token_kind(tk), symbol(s) {}
+    Token() {}
+};
+
+// List Node Class
+struct Node {
+    Token data;
+    Node* next;
+    
+    Node(Token, Node*);
+};
+
+// Linked list Class
+class TokenStream {
+private:
+    Node* head;
+    Node* tail;
+    Node* current;
+
+public:
+    ~TokenStream();
+    TokenStream();
+    TokenStream(Token);
+    void add_t(Token);
+    void add_h(Token);
+    Node* peek();
+    Token get(bool = false);
+    int length;
+    
 };
 
 #endif

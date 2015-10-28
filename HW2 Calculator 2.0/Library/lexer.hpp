@@ -11,8 +11,7 @@
 
 enum Lexer_States {
     lexing_flag,
-    error_flag,
-    eof_flag
+    error_flag
 };
 
 struct Lexer {
@@ -24,6 +23,8 @@ struct Lexer {
     unsigned int lookahead;
     // symbol table
     Symbol_Table* st;
+    // token stream
+    TokenStream ts;
     // this contains the state of the lexer
     int state;
 
@@ -35,7 +36,8 @@ struct Lexer {
     char get();
     char peek(int = 0);
     void digit();
-    void multi_char();
+    
+    TokenStream lex();
     
     // Token returning parsing functions
     Token scan();
@@ -52,7 +54,8 @@ struct Lexer {
     Token eq();
     Token logical_and();
     Token logical_or();
-    Token boolean();
+    Token boolean_true();
+    Token boolean_false();
     Token integer();
     Token error();
     Token eof();
