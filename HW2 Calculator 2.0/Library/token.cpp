@@ -81,9 +81,9 @@ Token TokenStream::get(bool reset){
 }
 
 // gets the current list item
-Node* TokenStream::peek(){
+Token TokenStream::peek(){
     if (this->current == NULL)
         this->current = this->head;
     
-    return this->current->next;
+    return this->current->next->data;
 }

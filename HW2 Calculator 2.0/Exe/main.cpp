@@ -8,15 +8,18 @@ using namespace std;
 int main()
 {
     try {
+        // create a lexer object
         Lexer* l = new Lexer();
+        // lex the input string into a token stream
         TokenStream ts = l->lex();
+        // create a parser object, pass it the token stream
+        Parser* p = new Parser(ts);
         
-        Token t;
-        do {
-            t = ts.get();
-            cout << t.symbol->spelling() << endl;
-        }while(t.symbol->token() != (int)eof_tok);
-        
+        if (p->match_if(eq_tok))
+            cout << "true";
+        else
+            cout << "false";
+
     }
     catch (exception& e){
         cout << "Standard exception: " << e.what() << endl;

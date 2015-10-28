@@ -2,10 +2,39 @@
 /*
  header file for the calculator parse class
  
- E -> E + F | E - F | F
- F -> F * T | F / T | F % T | T
- T -> D | (E)
- D -> [0-9]
+primary-expr -> literal | ( expr )
+
+unary-expr -> - unary-expr
+            | + unary-expr
+            | ! unary-expr
+            | primary-expr
+
+multiplicative-expr -> multiplicative-expr * unary-expr
+            | multiplicative-expr / unary-expr
+            | multiplicative-expr % unary-expr
+            | unary-expr
+            
+additive-expr -> additive-expr + multiplicative-expr
+            | additive-expr - multiplicative-expr
+            | multiplicative-expr
+
+ordering-expr -> ordering-expr '<' additive-expr
+            | ordering-expr '>' additive-expr
+            | ordering-expr '<=' additive-expr
+            | ordering-expr '>=' additive-expr
+            | additive-expr
+
+equality-expr -> equality-expr '==' ordering-expr
+            | equality-expr '!=' ordering-expr
+            | ordering-expr
+
+logical-and-expr -> logical-and-expr '&&' ordering-expr
+            | ordering-expr
+
+logical-or-expr -> logical-or-expr '||' logical-and-expr
+            | logical-and-expr
+
+expr -> logical-or-expr
 */
 
 #ifndef PARSER_HPP
@@ -14,27 +43,79 @@
 #include <string>
 #include <iostream>
 #include "eval.hpp"
+#include "token.hpp"
 
 // the parser class uses the grammar to produce the Abstract Syntax Tree.
 struct Parser {
-    // holds the users input
-    std::string input;
-    // stores the current look ahead character value
-    char lookahead;
-    // contains the current index of the look ahead within the input
-    unsigned int la_pos;
+    // holds the token stream
+    TokenStream ts;
 
     // parser class constructor
-    Parser ();
-    // gets the next look ahead value
-    void next();
+    Parser (TokenStream);
     
-    // E -> E + F | E - F | F
-    Expr* expression();
-    // F -> F * T | F / T | F % T | T
-    Expr* factor();
-    // T -> D | (E)
-    Expr* term();
+    // this returns true or false for a match and gets the character on a match
+    bool match_if(Token_Kind);
+    
+    /*
+    primary-expr -> literal | ( expr )
+    */
+    Expr* primary_expr();
+    
+    /*
+    unary-expr -> - unary-expr
+                | + unary-expr
+                | ! unary-expr
+                | primary-expr
+    */
+    Expr* unary_expr();
+    
+    /*
+    multiplicative-expr -> multiplicative-expr * unary-expr
+                | multiplicative-expr / unary-expr
+                | multiplicative-expr % unary-expr
+                | unary-expr
+     */
+    Expr* multiplicative_expr();
+    
+    /*           
+    additive-expr -> additive-expr + multiplicative-expr
+                | additive-expr - multiplicative-expr
+                | multiplicative-expr
+    */
+    Expr* additive_expr();
+    
+    /*
+    ordering-expr -> ordering-expr '<' additive-expr
+                | ordering-expr '>' additive-expr
+                | ordering-expr '<=' additive-expr
+                | ordering-expr '>=' additive-expr
+                | additive-expr
+    */
+    Expr* ordering_expr();
+    
+    /*
+    equality-expr -> equality-expr '==' ordering-expr
+                | equality-expr '!=' ordering-expr
+                | ordering-expr
+    */
+    Expr* equality_expr();
+    
+    /*
+    logical-and-expr -> logical-and-expr '&&' ordering-expr
+                | ordering-expr
+    */
+    Expr* logical_and_expr();
+    
+    /*
+    logical-or-expr -> logical-or-expr '||' logical-and-expr
+                | logical-and-expr
+    */
+    Expr* logical_or_expr();
+    
+    /*
+    expr -> logical-or-expr
+    */
+    Expr* expr();
 };
 
 #endif

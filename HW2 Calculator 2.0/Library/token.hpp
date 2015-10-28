@@ -60,7 +60,7 @@ public:
     TokenStream(Token);
     void add_t(Token);
     void add_h(Token);
-    Node* peek();
+    Token peek();
     Token get(bool = false);
     int length;
     
