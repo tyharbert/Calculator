@@ -36,12 +36,12 @@ char Lexer::peek(int i){
 }
 
 // this will lex tokens
-TokenStream Lexer::lex(){
+std::vector<Token> Lexer::lex(){
     Token t;
     
     while(t.symbol->token() != (int)eof_tok){
         t = this->scan();
-        this->ts.add_t(t);
+        this->ts.push_back(t);
     }
     
     if (this->state == (int)error_flag)

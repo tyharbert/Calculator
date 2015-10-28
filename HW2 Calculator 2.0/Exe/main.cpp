@@ -1,7 +1,8 @@
 // Tyler Harbert
 
 #include <iostream>
-#include "../Library/comp_lib.hpp"
+#include "../Library/lexer.hpp"
+#include "../Library/parser.hpp"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main()
         // create a lexer object
         Lexer* l = new Lexer();
         // lex the input string into a token stream
-        TokenStream ts = l->lex();
+        vector<Token> ts = l->lex();
         // create a parser object, pass it the token stream
         Parser* p = new Parser(ts);
         

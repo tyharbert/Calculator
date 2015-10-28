@@ -51,14 +51,13 @@ expr -> logical-or-expr
 #include "parser.hpp"
 
     // parser class constructor, gets the users input and initializes look ahead.
-    Parser::Parser (TokenStream ts) {
+    Parser::Parser (std::vector<Token> ts) {
         this->ts = ts;
     }
 
     bool Parser::match_if(Token_Kind tk) {
-        std::cout <<"-\n";
-        if (this->ts.peek().symbol->token() == (int)tk){
-            this->ts.get();
+        if (this->ts.back().symbol->token() == (int)tk){
+            this->ts.pop_back();
             return true;
         }
         else

@@ -39,31 +39,4 @@ struct Token {
     Token() {}
 };
 
-// List Node Class
-struct Node {
-    Token data;
-    Node* next;
-    
-    Node(Token, Node*);
-};
-
-// Linked list Class
-class TokenStream {
-private:
-    Node* head;
-    Node* tail;
-    Node* current;
-
-public:
-    ~TokenStream();
-    TokenStream();
-    TokenStream(Token);
-    void add_t(Token);
-    void add_h(Token);
-    Token peek();
-    Token get(bool = false);
-    int length;
-    
-};
-
 #endif
