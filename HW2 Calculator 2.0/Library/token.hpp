@@ -36,7 +36,6 @@ struct Token {
     Symbol* symbol;
     
     Token(int tk, Symbol* s): token_kind(tk), symbol(s) {}
-    Token() {}
 };
 
 // List Node Class
