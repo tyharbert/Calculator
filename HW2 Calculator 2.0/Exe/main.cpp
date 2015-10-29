@@ -17,6 +17,7 @@ int main()
         Parser* p = new Parser(ts);
         // call the expr() function to parse the token stream
         Expr* expression = p->expr();
+        cout << "made it to the end";
 
     }
     catch (exception& e){

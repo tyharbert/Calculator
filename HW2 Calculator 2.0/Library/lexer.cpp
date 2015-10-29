@@ -42,7 +42,9 @@ std::queue<Token> Lexer::lex(){
     while(t.symbol->token() != (int)eof_tok) {
         t = this->scan();
         
-        this->ts.push(t);
+        // exclude eof token because of errors while parsing
+        if (t.symbol->token() != (int)eof_tok)
+            this->ts.push(t);
     }
     
     if (this->state == (int)lexer_error_flag)
