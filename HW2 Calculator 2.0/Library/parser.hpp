@@ -41,18 +41,18 @@ expr -> logical-or-expr
 #define PARSER_HPP
 
 #include <string>
-#include <vector>
 #include <iostream>
+#include <queue>
 #include "ast.hpp"
 #include "token.hpp"
 
 // the parser class uses the grammar to produce the Abstract Syntax Tree.
 struct Parser {
     // holds the token stream
-    std::vector<Token> ts;
+    std::queue<Token> ts;
 
     // parser class constructor
-    Parser (std::vector<Token>);
+    Parser (std::queue<Token>);
     
     // this returns true or false for a match
     // and pops the token out of the vector on a match

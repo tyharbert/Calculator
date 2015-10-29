@@ -38,7 +38,7 @@ struct Token {
     explicit operator bool() const;
     
     Token(int tk, Symbol* s): token_kind(tk), symbol(s) {}
-    Token() {}
+    Token(): token_kind((int)error_tok), symbol(new Symbol((int)error_tok)) {}
 };
 
 // This must be added to allow the match_if function

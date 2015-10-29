@@ -36,15 +36,13 @@ char Lexer::peek(int i){
 }
 
 // this will lex tokens
-std::vector<Token> Lexer::lex(){
-    Token t;
+std::queue<Token> Lexer::lex(){
+    Token t = Token();
     
-    while(t.symbol->token() != (int)eof_tok){
+    while(t.symbol->token() != (int)eof_tok) {
         t = this->scan();
         
-        // don't insert the eof token because it causes problems in parsing
-        if (t.symbol->token() != (int)eof_tok)
-            this->ts.push_back(t);
+        this->ts.push(t);
     }
     
     if (this->state == (int)lexer_error_flag)
@@ -223,7 +221,7 @@ Token Lexer::error(){
     this->get();
     builder = "";
     
-    return Token(error_tok, new Symbol((int)error_tok));
+    return Token();
 }
 
 Token Lexer::eof(){

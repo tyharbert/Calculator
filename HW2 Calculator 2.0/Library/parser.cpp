@@ -1,13 +1,6 @@
 // TEMP
 // getting int and bool value dynamic_cast<Int_Sym*>(t1.symbol)->value
 
-//        Token t;
-//        do {
-//            t = ts.get();
-//            cout << t.symbol->spelling() << endl;
-//        }while(t.symbol->token() != (int)eof_tok);
-//        
-
 // Tyler Harbert
 /*
 code file for the functions of the parser class
@@ -51,17 +44,19 @@ expr -> logical-or-expr
 #include "parser.hpp"
 
     // parser class constructor, gets the users input and initializes look ahead.
-    Parser::Parser (std::vector<Token> ts) {
+    Parser::Parser (std::queue<Token> ts) {
         this->ts = ts;
     }
 
     void Parser::debug_print(){
-        if (ts.back().symbol->token() == (int)eof_tok)
-            std::cout << "matching: eof tok" << std::endl;
-        if (ts.back().symbol->token() == (int)error_tok)
-            std::cout  << "matching: error tok" << std::endl;
-        else
-            std::cout  << "matching: " << ts.back().symbol->spelling() << std::endl;
+        if (!ts.empty()){
+            if (ts.front().symbol->token() == (int)eof_tok)
+                std::cout << "matching: eof tok" << std::endl;
+            if (ts.front().symbol->token() == (int)error_tok)
+                std::cout  << "matching: error tok" << std::endl;
+            else
+                std::cout  << "matching: " << ts.front().symbol->spelling() << std::endl;
+        }
     }
 
     // this returns the Token on match or an error Token
@@ -71,9 +66,9 @@ expr -> logical-or-expr
         // temporary print
         debug_print();
         
-        if (this->ts.back().symbol->token() == (int)tk){
-            Token t = this->ts.back();
-            this->ts.pop_back();
+        if (this->ts.front().symbol->token() == (int)tk){
+            Token t = this->ts.front();
+            this->ts.pop();
             return t;
         }
         else {
@@ -88,13 +83,13 @@ expr -> logical-or-expr
         // temporary print
         debug_print();
         
-        if (this->ts.back().symbol->token() == (int)tk){
-            Token t = this->ts.back();
-            this->ts.pop_back();
+        if (this->ts.front().symbol->token() == (int)tk){
+            Token t = this->ts.front();
+            this->ts.pop();
             return t;
         }
         
-        throw std::runtime_error("Match failed for " + ts.back().symbol->spelling() );
+        throw std::runtime_error("Match failed for " + std::to_string(ts.front().symbol->token()) );
     }
 
     /*

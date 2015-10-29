@@ -5,8 +5,8 @@
 
 #include <string>
 #include <iostream>
-#include <vector>
 #include <cassert>
+#include <queue>
 #include "token.hpp"
 #include "symbol.hpp"
 
@@ -25,7 +25,7 @@ struct Lexer {
     // symbol table
     Symbol_Table* st;
     // token stream
-    std::vector<Token> ts;
+    std::queue<Token> ts;
     // this contains the state of the lexer
     int state;
 
@@ -38,7 +38,7 @@ struct Lexer {
     char peek(int = 0);
     void digit();
     
-    std::vector<Token> lex();
+    std::queue<Token> lex();
     
     // Token returning parsing functions
     Token scan();

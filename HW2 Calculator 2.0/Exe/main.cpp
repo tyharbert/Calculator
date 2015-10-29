@@ -12,7 +12,7 @@ int main()
         // create a lexer object
         Lexer* l = new Lexer();
         // lex the input string into a token stream
-        vector<Token> ts = l->lex();
+        queue<Token> ts = l->lex();
         // create a parser object, pass it the token stream
         Parser* p = new Parser(ts);
         // call the expr() function to parse the token stream
