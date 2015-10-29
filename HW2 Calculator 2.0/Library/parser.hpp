@@ -54,8 +54,16 @@ struct Parser {
     // parser class constructor
     Parser (std::vector<Token>);
     
-    // this returns true or false for a match and gets the character on a match
-    bool match_if(Token_Kind);
+    // this returns true or false for a match
+    // and pops the token out of the vector on a match
+    Token match_if(Token_Kind);
+    
+    // this pops the token out of the vector on a match
+    // and returns an error if it doesnt match
+    Token match(Token_Kind);
+    
+    // fuction to print the token attempting to be matched
+    void debug_print();
     
     /*
     primary-expr -> literal | ( expr )

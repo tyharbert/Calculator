@@ -12,7 +12,7 @@
 
 enum Lexer_States {
     lexing_flag,
-    error_flag
+    lexer_error_flag
 };
 
 struct Lexer {

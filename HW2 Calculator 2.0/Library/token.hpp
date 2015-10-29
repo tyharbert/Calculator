@@ -35,8 +35,17 @@ struct Token {
     int token_kind; 
     Symbol* symbol;
     
+    explicit operator bool() const;
+    
     Token(int tk, Symbol* s): token_kind(tk), symbol(s) {}
     Token() {}
 };
+
+// This must be added to allow the match_if function
+// to evaluate to false only if an error token is returned
+inline Token::operator bool() const
+{
+  return token_kind != (int)error_tok;
+}
 
 #endif

@@ -15,11 +15,8 @@ int main()
         vector<Token> ts = l->lex();
         // create a parser object, pass it the token stream
         Parser* p = new Parser(ts);
-        
-        if (p->match_if(eq_tok))
-            cout << "true";
-        else
-            cout << "false";
+        // call the expr() function to parse the token stream
+        Expr* expression = p->expr();
 
     }
     catch (exception& e){

@@ -41,10 +41,13 @@ std::vector<Token> Lexer::lex(){
     
     while(t.symbol->token() != (int)eof_tok){
         t = this->scan();
-        this->ts.push_back(t);
+        
+        // don't insert the eof token because it causes problems in parsing
+        if (t.symbol->token() != (int)eof_tok)
+            this->ts.push_back(t);
     }
     
-    if (this->state == (int)error_flag)
+    if (this->state == (int)lexer_error_flag)
         throw std::runtime_error("An error occured during lexing");
     
     return this->ts;
@@ -213,7 +216,7 @@ Token Lexer::integer(){
 }
 
 Token Lexer::error(){
-    this->state = (int)error_flag;
+    this->state = (int)lexer_error_flag;
     std::cout << "There was an error lexing '" << this->peek() << "'";
     
     // discard

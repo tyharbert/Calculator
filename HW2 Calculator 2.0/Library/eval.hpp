@@ -14,12 +14,4 @@ int validate_divide_0(int);
 // This function uses the visitor pattern to traverse the AST and evaluate the expression
 int eval(Expr const*);
 
-// S-Expression Class
-// This function uses the visitor pattern to traverse the AST and print the expression as an s expression
-void s_expr(Expr const*);
-
-// Postfix Class
-// This function uses the visitor pattern to traverse the AST and print the expression in post fix notation
-void post_fix(Expr const*);
-
 # endif
