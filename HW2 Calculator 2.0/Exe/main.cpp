@@ -4,6 +4,7 @@
 #include "../Library/lexer.hpp"
 #include "../Library/parser.hpp"
 #include "../Library/eval.hpp"
+#include "../Library/value.hpp"
 
 using namespace std;
 
