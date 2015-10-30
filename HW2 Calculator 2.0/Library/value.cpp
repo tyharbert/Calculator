@@ -28,7 +28,7 @@ std::ostream& operator<<(std::ostream& os, const Value& v)
     if (v.is_int())
         os << v._i;
     else
-        os << v._b;
+        os << (v._b?"true":"false");
     
     return os;
 }
