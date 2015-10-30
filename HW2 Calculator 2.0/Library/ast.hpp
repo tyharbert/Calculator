@@ -30,7 +30,8 @@
 
 // forward declarations of AST classes to allow
 // for the Visit class to be declared
-struct Literal_Expr;
+struct Bool_Literal_Expr;
+struct Int_Literal_Expr;
 struct Or_Expr;
 struct And_Expr;
 struct Neq_Expr;
@@ -50,7 +51,8 @@ struct Not_Expr;
 
 // declaration of the visit class that is used to traverse the AST
 struct Visit {
-    virtual void visit(Literal_Expr const* e) = 0;
+    virtual void visit(Bool_Literal_Expr const* e) = 0;
+    virtual void visit(Int_Literal_Expr const* e) = 0;
     virtual void visit(Or_Expr const* e) = 0;
     virtual void visit(And_Expr const* e) = 0;
     virtual void visit(Neq_Expr const* e) = 0;
@@ -79,6 +81,18 @@ struct Expr {
 struct Literal_Expr:Expr {
     Symbol* sym;
     Literal_Expr(Symbol* s): sym(s) {}
+    void accept(Visit& v) const = 0;
+};
+
+// boolean literal class, B
+struct Bool_Literal_Expr:Literal_Expr {
+    Bool_Literal_Expr(Symbol* s): Literal_Expr(s) {}
+    void accept(Visit& v) const { v.visit(this); };
+};
+
+// integer literal class, Z
+struct Int_Literal_Expr:Literal_Expr {
+    Int_Literal_Expr(Symbol* s): Literal_Expr(s) {}
     void accept(Visit& v) const { v.visit(this); };
 };
 

@@ -4,6 +4,7 @@
 #define TOKEN_HPP
 
 #include "symbol.hpp"
+#include <vector>
 
 // Token kinds
 enum Token_Kind
@@ -46,6 +47,35 @@ struct Token {
 inline Token::operator bool() const
 {
   return token_kind != (int)error_tok;
+}
+
+struct TokenStream {
+    std::vector<Token> _ts;
+    int _index;
+    
+    TokenStream(): _index(0) {}
+    void push_back(Token);
+    Token get();
+    Token peek();
+    bool eos();
+};
+
+inline void TokenStream::push_back(Token t){
+    _ts.push_back(t);
+}
+
+inline Token TokenStream::get(){
+    int temp = this->_index;
+    this->_index++;
+    return this->_ts[temp];
+}
+
+inline Token TokenStream::peek(){
+    return this->_ts[this->_index];
+}
+
+inline bool TokenStream::eos(){
+    return (this->_index >= this->_ts.size());
 }
 
 #endif

@@ -44,32 +44,19 @@ expr -> logical-or-expr
 #include "parser.hpp"
 
     // parser class constructor, gets the users input and initializes look ahead.
-    Parser::Parser (std::queue<Token> ts) {
+    Parser::Parser (TokenStream ts) {
         this->ts = ts;
-    }
-
-    void Parser::debug_print(){
-        if (!ts.empty()){
-            if (ts.front().symbol->token() == (int)eof_tok)
-                std::cout << "matching: eof tok" << std::endl;
-            if (ts.front().symbol->token() == (int)error_tok)
-                std::cout  << "matching: error tok" << std::endl;
-            else
-                std::cout  << "matching: " << ts.front().symbol->spelling() << std::endl;
-        }
     }
 
     // this returns the Token on match or an error Token
     // the bool() of Token is overloaded to evaluate
     // to false only if the Token returned is an error token
     Token Parser::match_if(Token_Kind tk) {
-        // temporary print
-        debug_print();
+        if (ts.eos())
+            return Token();
         
-        if (this->ts.front().symbol->token() == (int)tk){
-            Token t = this->ts.front();
-            this->ts.pop();
-            return t;
+        if (this->ts.peek().symbol->token() == (int)tk){
+            return ts.get();
         }
         else {
             Token t = Token(error_tok, new Symbol((int)error_tok));
@@ -80,16 +67,14 @@ expr -> logical-or-expr
     // this pops the token out of the vector on a match
     // and returns an error if it doesnt match
     Token Parser::match(Token_Kind tk) {
-        // temporary print
-        debug_print();
+        if (ts.eos())
+            return Token();
         
-        if (this->ts.front().symbol->token() == (int)tk){
-            Token t = this->ts.front();
-            this->ts.pop();
-            return t;
+        if (this->ts.peek().symbol->token() == (int)tk){
+            return ts.get();
         }
         
-        throw std::runtime_error("Match failed for " + std::to_string(ts.front().symbol->token()) );
+        throw std::runtime_error("Match failed for " + std::to_string(ts.peek().symbol->token()) );
     }
 
     /*
@@ -97,10 +82,10 @@ expr -> logical-or-expr
     */
     Expr* Parser::primary_expr() {
         if (Token t = match_if(boolean_tok))
-        return new Literal_Expr(t.symbol);
+        return new Bool_Literal_Expr(t.symbol);
 
         else if (Token t = match_if(integer_tok))
-        return new Literal_Expr(t.symbol);
+        return new Int_Literal_Expr(t.symbol);
 
         else if (match_if(lparen_tok)) {
         Expr* e = expr();
