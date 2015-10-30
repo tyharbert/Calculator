@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../Library/lexer.hpp"
 #include "../Library/parser.hpp"
+#include "../Library/eval.hpp"
 
 using namespace std;
 
@@ -16,7 +17,10 @@ int main()
         // create a parser object, pass it the token stream
         Parser* p = new Parser(ts);
         // call the expr() function to parse the token stream
-        Expr* expression = p->expr();
+        Expr* ast = p->expr();
+        
+        print(ast);
+        cout << endl;
 
     }
     catch (exception& e){

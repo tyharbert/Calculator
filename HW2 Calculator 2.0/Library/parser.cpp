@@ -1,6 +1,3 @@
-// TEMP
-// getting int and bool value dynamic_cast<Int_Sym*>(t1.symbol)->value
-
 // Tyler Harbert
 /*
 code file for the functions of the parser class
@@ -82,15 +79,15 @@ expr -> logical-or-expr
     */
     Expr* Parser::primary_expr() {
         if (Token t = match_if(boolean_tok))
-        return new Bool_Literal_Expr(t.symbol);
+            return new Bool_Literal_Expr(t.symbol);
 
         else if (Token t = match_if(integer_tok))
-        return new Int_Literal_Expr(t.symbol);
+            return new Int_Literal_Expr(t.symbol);
 
         else if (match_if(lparen_tok)) {
-        Expr* e = expr();
-        match(rparen_tok);
-        return e;
+            Expr* e = expr();
+            match(rparen_tok);
+            return e;
         }
         
         throw std::runtime_error("Unexpected primary expression.");

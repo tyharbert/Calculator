@@ -12,6 +12,18 @@ int validate_divide_0(int);
 
 // Evaluation function
 // This function uses the visitor pattern to traverse the AST and evaluate the expression
-int eval(Expr const*);
+//Value eval(Expr const*);
+void print(Expr const*);
+
+struct Value{
+    enum Value_Type{
+        INT,
+        BOOL
+    };
+    
+    int i;
+    bool b;
+    Value_Type t;   
+};
 
 # endif

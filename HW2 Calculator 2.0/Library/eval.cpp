@@ -15,19 +15,60 @@ int validate_divide_0(int i){
 
 // Evaluation function
 // This function uses the visitor pattern to traverse the AST andevaluate the expression
-int eval(Expr const* e){
-    
+//auto eval(Expr const* e){
+//    
 //    struct V: Visit {
-//        int result;
-//        void visit(Dig const* e) { result = e->value; };
-//        void visit(Add const* e) { result = eval(e->e1) + eval(e->e2); };
-//        void visit(Sub const* e) { result = eval(e->e1) - eval(e->e2);  };
-//        void visit(Mul const* e) { result = eval(e->e1) * eval(e->e2);  };
-//        void visit(Div const* e) { result = eval(e->e1) / validate_divide_0(eval(e->e2));  };
-//        void visit(Mod const* e) { result = eval(e->e1) % eval(e->e2);  };
+//        auto result;
+//        
+//        void visit(Bool_Literal_Expr const* e) { result = dynamic_cast<Bool_Sym*>(e->sym)->value; }
+//        void visit(Int_Literal_Expr const* e) { result = dynamic_cast<Int_Sym*>(e->sym)->value; }
+//        void visit(Or_Expr const* e) { eval(e->e1) || eval(e->e2); }
+//        void visit(And_Expr const* e) { eval(e->e1) && eval(e->e2); }
+//        void visit(Neq_Expr const* e) { eval(e->e1) != eval(e->e2); }
+//        void visit(Eq_Expr const* e) { eval(e->e1) == eval(e->e2); }
+//        void visit(Lt_Expr const* e) { eval(e->e1) < eval(e->e2); }
+//        void visit(Gt_Expr const* e) { eval(e->e1) > eval(e->e2); }
+//        void visit(Lteq_Expr const* e) { eval(e->e1) <= eval(e->e2); }
+//        void visit(Gteq_Expr const* e) { eval(e->e1) >= eval(e->e2); }
+//        void visit(Add_Expr const* e) { eval(e->e1) && eval(e->e2); }
+//        void visit(Sub_Expr const* e) { eval(e->e1) - eval(e->e2); }
+//        void visit(Mul_Expr const* e) { eval(e->e1) * eval(e->e2); }
+//        void visit(Div_Expr const* e) { eval(e->e1) / validate_divide_0(eval(e->e2)); }
+//        void visit(Mod_Expr const* e) { eval(e->e1) % eval(e->e2); }
+//        void visit(Neg_Expr const* e) { !eval(e->e); }
+//        void visit(Pos_Expr const* e) { eval(e->e); }
+//        void visit(Not_Expr const* e) { -eval(e->e); }
 //    };
 //    
 //    V v;
 //    e->accept(v);
-    return 0;//v.result;
+//    return v.result;
+//}
+
+void print(Expr const* e){
+    
+    struct V: Visit {
+        
+        void visit(Bool_Literal_Expr const* e) { std::cout << dynamic_cast<Bool_Sym*>(e->sym)->value; }
+        void visit(Int_Literal_Expr const* e) { std::cout << dynamic_cast<Int_Sym*>(e->sym)->value; }
+        void visit(Or_Expr const* e) {  print(e->e1); std::cout << " || "; print(e->e2); }
+        void visit(And_Expr const* e) { print(e->e1); std::cout << " && "; print(e->e2); }
+        void visit(Neq_Expr const* e) { print(e->e1); std::cout << " != "; print(e->e2); }
+        void visit(Eq_Expr const* e) { print(e->e1); std::cout << " == "; print(e->e2); }
+        void visit(Lt_Expr const* e) { print(e->e1); std::cout << " < "; print(e->e2); }
+        void visit(Gt_Expr const* e) { print(e->e1); std::cout << " > "; print(e->e2); }
+        void visit(Lteq_Expr const* e) { print(e->e1); std::cout << " <= "; print(e->e2); }
+        void visit(Gteq_Expr const* e) { print(e->e1); std::cout << " >= "; print(e->e2); }
+        void visit(Add_Expr const* e) { print(e->e1); std::cout << " + "; print(e->e2); }
+        void visit(Sub_Expr const* e) { print(e->e1); std::cout << " - "; print(e->e2); }
+        void visit(Mul_Expr const* e) { print(e->e1); std::cout << " * "; print(e->e2); }
+        void visit(Div_Expr const* e) { print(e->e1); std::cout << " / "; print(e->e2); }
+        void visit(Mod_Expr const* e) { print(e->e1); std::cout << " % "; print(e->e2); }
+        void visit(Neg_Expr const* e) {  std::cout << "!"; print(e->ex);}
+        void visit(Pos_Expr const* e) {  std::cout << "+"; print(e->ex);}
+        void visit(Not_Expr const* e) {  std::cout << "-"; print(e->ex);}
+    };
+    
+    V v;
+    e->accept(v);
 }
