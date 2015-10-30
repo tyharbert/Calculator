@@ -21,6 +21,7 @@ public:
     Value (bool b): _b(b), _t(BOOL) {}
     bool is_bool() const;
     bool is_int() const;
+    int type();
     int get_int();
     bool get_bool();
     

@@ -10,6 +10,10 @@ bool Value::get_bool(){
     return this->_b;
 }
 
+int Value::type(){
+    return (int)this->_t;
+}
+
 bool Value::is_bool() const{
     return this->_t == BOOL;
 }

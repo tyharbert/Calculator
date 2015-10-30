@@ -20,8 +20,8 @@ int main()
         // call the expr() function to parse the token stream
         Expr* ast = p->expr();
         
-        print(ast);
-        cout << endl;
+        //print(ast);
+        cout << eval(ast) << endl;
 
     }
     catch (exception& e){

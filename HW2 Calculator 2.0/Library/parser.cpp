@@ -71,7 +71,7 @@ expr -> logical-or-expr
             return ts.get();
         }
         
-        throw std::runtime_error("Match failed for " + std::to_string(ts.peek().symbol->token()) );
+        throw std::runtime_error("Match failed for " + ts.peek().symbol->spelling() );
     }
 
     /*
