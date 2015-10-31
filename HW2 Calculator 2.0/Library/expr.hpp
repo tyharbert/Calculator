@@ -23,8 +23,8 @@
       B (booleans)
 */
 
-#ifndef AST_HPP
-#define AST_HPP
+#ifndef EXPR_HPP
+#define EXPR_HPP
 
 #include "symbol.hpp"
 

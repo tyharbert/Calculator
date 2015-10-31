@@ -5,11 +5,9 @@
 #ifndef EVAL_HPP
 #define EVAL_HPP
 
-#include "ast.hpp"
+#include <iostream>
+#include "expr.hpp"
 #include "value.hpp"
-
-// throw an exception if the integer is a zero
-int validate_divide_0(int);
 
 // Evaluation function
 // This function uses the visitor pattern to traverse the AST and evaluate the expression

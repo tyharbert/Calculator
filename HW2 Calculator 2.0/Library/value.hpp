@@ -1,7 +1,7 @@
 // Tyler Harbert
 
-#ifndef Value_HPP
-#define Value_HPP
+#ifndef VALUE_HPP
+#define VALUE_HPP
 
 #include <iostream>
 

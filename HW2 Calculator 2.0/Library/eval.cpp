@@ -2,7 +2,6 @@
 // code file for the evaluation procedures for evaluating the expression,
 // printing the s-expression and printing the post fix notation.
 
-#include <iostream>
 #include "eval.hpp"
 
 // Evaluation function
