@@ -1,4 +1,5 @@
 // Tyler Harbert
+// header file for the lexer class
 
 #ifndef LEXER_HPP
 #define LEXER_HPP
@@ -9,6 +10,7 @@
 #include "token.hpp"
 #include "symbol.hpp"
 
+// Lexer state flag definitions
 enum Lexer_States {
     lexing_flag,
     lexer_error_flag

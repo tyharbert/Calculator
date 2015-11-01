@@ -1,4 +1,5 @@
 // Tyler Harbert
+// header file for symbol.
 
 #ifndef SYMBOL_HPP
 #define SYMBOL_HPP

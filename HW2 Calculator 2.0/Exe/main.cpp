@@ -23,7 +23,10 @@ int main()
         // Type checking
         elaborate(ast);
         
-        //print(ast);
+        // prints the ast
+        // print(ast);
+        
+        // evaluates the ast
         cout << eval(ast) << endl;
 
     }

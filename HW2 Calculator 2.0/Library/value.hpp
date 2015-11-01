@@ -1,10 +1,13 @@
 // Tyler Harbert
+// header file for value class
 
 #ifndef VALUE_HPP
 #define VALUE_HPP
 
 #include <iostream>
 
+// Value class
+// this can contain an integer or a bool value
 class Value{
 private:
     enum Value_Type{

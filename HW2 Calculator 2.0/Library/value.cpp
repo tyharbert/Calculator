@@ -1,6 +1,9 @@
 // Tyler Harbert
+// code file for value class
 
 #include "value.hpp"
+
+// Value class function definitions
 
 int Value::get_int(){
     return this->_i;

@@ -1,11 +1,10 @@
 //Tyler Harbert
-// code file for the evaluation procedures for evaluating the expression,
-// printing the s-expression and printing the post fix notation.
+// code file for the elaboration procedures for type checking the expression.
 
 #include "elaborate.hpp"
 
-// Evaluation function
-// This function uses the visitor pattern to traverse the AST andevaluate the expression
+// Elaborate function
+// This function uses the visitor pattern to traverse the AST and type check each expression
 Type* elaborate(Expr const* e){
     
     struct V: Visit {
@@ -35,6 +34,8 @@ Type* elaborate(Expr const* e){
     e->accept(v);
     return v.result;
 }
+
+// Different elaboration functions for each Expr type
 
 Type* elaborate(Bool_Literal_Expr const* e){
     return get_bool_type();

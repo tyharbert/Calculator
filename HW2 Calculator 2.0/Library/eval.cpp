@@ -1,6 +1,5 @@
-//Tyler Harbert
-// code file for the evaluation procedures for evaluating the expression,
-// printing the s-expression and printing the post fix notation.
+// Tyler Harbert
+// code file for the evaluation procedures.
 
 #include "eval.hpp"
 
@@ -35,6 +34,8 @@ Value eval(Expr const* e){
     e->accept(v);
     return v.result;
 }
+
+// Different evaluation functions for each Expr type
 
 Value eval(Bool_Literal_Expr const* e){
     return dynamic_cast<Bool_Sym*>(e->sym)->value;
@@ -158,6 +159,7 @@ Value eval(Not_Expr const* e){
 }
 
 
+// Extra function to print the ast for testing
 void print(Expr const* e){
     
     struct V: Visit {

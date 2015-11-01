@@ -1,6 +1,5 @@
-// Tyler Harbert
-// header file for the evaluation procedures for evaluating the expression,
-// printing the s-expression and printing the post fix notation.
+//Tyler Harbert
+// header file for the elaboration procedures for type checking the expression.
 
 #ifndef ELABORATE_HPP
 #define ELABORATE_HPP
@@ -9,10 +8,11 @@
 #include "expr.hpp"
 #include "type.hpp"
 
-// Evaluation function
-// This function uses the visitor pattern to traverse the AST and evaluate the expression
+// Elaborate function
+// This function uses the visitor pattern to traverse the AST and type check each expression
 Type* elaborate(Expr const*);
 
+// Different elaboration functions for each Expr type
 Type* elaborate(Bool_Literal_Expr const* e);
 Type* elaborate(Int_Literal_Expr const* e);
 Type* elaborate(Or_Expr const* e);

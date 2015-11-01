@@ -1,7 +1,9 @@
 // Tyler Harbert
+// header file for the lexer class
 
 #include "lexer.hpp"
 
+// constructor
 Lexer::Lexer(){
     this->state = (int)lexing_flag;
     this->lookahead = 0;
@@ -184,7 +186,7 @@ Token Lexer::boolean_true(){
 }
 
 Token Lexer::boolean_false(){
-    // this is for true
+    // this is for false
     if (this->peek(1) == 'a')
         this->get();
     if (this->peek(1) == 'l')

@@ -1,4 +1,5 @@
 // Tyler Harbert
+// header file for types
 
 #ifndef TYPE_HPP
 #define TYPE_HPP

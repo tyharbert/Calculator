@@ -1,4 +1,5 @@
 // Tyler Harbert
+// code file for symbol.
 
 #include "symbol.hpp"
 #include "token.hpp"

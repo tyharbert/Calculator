@@ -1,6 +1,5 @@
 // Tyler Harbert
-// header file for the evaluation procedures for evaluating the expression,
-// printing the s-expression and printing the post fix notation.
+// header file for the evaluation procedures.
 
 #ifndef EVAL_HPP
 #define EVAL_HPP
@@ -13,6 +12,7 @@
 // This function uses the visitor pattern to traverse the AST and evaluate the expression
 Value eval(Expr const*);
 
+// Different evaluation functions for each Expr type
 Value eval(Bool_Literal_Expr const* e);
 Value eval(Int_Literal_Expr const* e);
 Value eval(Or_Expr const* e);
@@ -32,6 +32,7 @@ Value eval(Neg_Expr const* e);
 Value eval(Pos_Expr const* e);
 Value eval(Not_Expr const* e);
 
+// Extra function to print the ast for testing
 void print(Expr const*);
 
 # endif

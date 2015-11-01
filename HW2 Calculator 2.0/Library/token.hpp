@@ -49,6 +49,9 @@ inline Token::operator bool() const
   return token_kind != (int)error_tok;
 }
 
+
+// A class to hold all of the lexed tokens
+
 struct TokenStream {
     std::vector<Token> _ts;
     int _index;
