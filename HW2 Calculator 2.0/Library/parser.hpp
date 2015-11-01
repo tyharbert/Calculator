@@ -28,8 +28,8 @@ equality-expr -> equality-expr '==' ordering-expr
             | equality-expr '!=' ordering-expr
             | ordering-expr
 
-logical-and-expr -> logical-and-expr '&&' ordering-expr
-            | ordering-expr
+logical-and-expr -> logical-and-expr '&&' equality-expr
+            | equality-expr
 
 logical-or-expr -> logical-or-expr '||' logical-and-expr
             | logical-and-expr
@@ -109,8 +109,8 @@ struct Parser {
     Expr* equality_expr();
     
     /*
-    logical-and-expr -> logical-and-expr '&&' ordering-expr
-                | ordering-expr
+    logical-and-expr -> logical-and-expr '&&' equality-expr
+                | equality-expr
     */
     Expr* logical_and_expr();
     

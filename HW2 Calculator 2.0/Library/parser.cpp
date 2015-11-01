@@ -28,8 +28,8 @@ equality-expr -> equality-expr '==' ordering-expr
             | equality-expr '!=' ordering-expr
             | ordering-expr
 
-logical-and-expr -> logical-and-expr '&&' ordering-expr
-            | ordering-expr
+logical-and-expr -> logical-and-expr '&&' equality-expr
+            | equality-expr
 
 logical-or-expr -> logical-or-expr '||' logical-and-expr
             | logical-and-expr
@@ -229,14 +229,14 @@ expr -> logical-or-expr
     }
     
     /*
-    logical-and-expr -> logical-and-expr '&&' ordering-expr
-                | ordering-expr
+    logical-and-expr -> logical-and-expr '&&' equality-expr
+                | equality-expr
     */
     Expr* Parser::logical_and_expr() {
-        Expr* e1 = ordering_expr();
+        Expr* e1 = equality_expr();
         while (true){
             if(this->match_if(logical_and_tok)){
-                Expr* e2 = ordering_expr();
+                Expr* e2 = equality_expr();
                 e1 = new And_Expr(e1,e2);
                 
             }else{
