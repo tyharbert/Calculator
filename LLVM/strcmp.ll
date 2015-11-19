@@ -2,21 +2,17 @@
 ; LLVM String Compare
 
 ; global string
-@globstr = global [13xi8] c"input string\00"
+@globstr = global [13 x i8] c"input string\00"
 
 ; for printing
 declare i32 @puts(i8*)
 
-define i32 @main {
-
-    ret 0
-}
-
 define i32 @strcmp(i8* %str1, i8* %str2){
     
     ; initialize an iterator at 0
-    %offset = alloc i32
+    %offset = alloca i32
     store i32 0, i32* %offset
+    br label %condit
     
 condit:
     ; load both of the first characters
@@ -49,19 +45,18 @@ body:
     
 retneg:
     ; return -1
-    %ans1 = alloc i32
-    store i32 -1, i32* %ans1
-    ret i32 %ans1
+    ret i32 -1
 
 retpos:
     ; return 1
-    %ans2 = alloc i32
-    store i32 1, i32* %ans2
-    ret i32 %ans2
+    ret i32 1
 
 retzero:
     ; return 0
-    %ans3 = alloc i32
-    store i32 0, i32* %ans3
-    ret i32 %ans3
+    ret i32 0
+}
+
+define i32 @main() {
+
+    ret i32 0
 }

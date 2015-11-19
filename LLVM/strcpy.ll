@@ -2,31 +2,58 @@
 ; LLVM String Copy
 
 ; global string
-@globstr = global [13xi8] c"input string\00"
+@globstr = global [13 x i8] c"input string\00"
 
 ; for printing
 declare i32 @puts(i8*)
 
-define i32 @main {
+; string length function
+define i8 @strlen(i8* %str){
 
-    ret 0
+; initialize an iterator at 0
+%offset = alloca i8
+store i8 0, i8* %offset
+br label %condit
+
+condit:
+; load the current character
+%idx = load i8* %offset
+%str1 = getelementptr inbounds i8* %str, i8 %idx
+%char = load i8* %str1
+
+; check if the current char is NULL
+%res = icmp eq i8 %char, 0
+br i1 %res, label %end, label %body
+
+body:
+; increment the offset variable by 1
+%cur_offset = load i8* %offset
+%new_offset = add nsw i8 %cur_offset, 1
+store i8 %new_offset, i8* %offset
+br label %condit
+
+end:
+; return the index that the NULL was found at
+ret i8 %idx
 }
 
 define i8* @strcpy(i8* %dest, i8* %src){
 
     ; get str length
-    %len = call i32 @strlen(i8* %src)
+    %len = call i8 @strlen(i8* %src)
     ; if string length is zero then end
-    %1 = icmp eq i32 %len, 0
+    %1 = icmp eq i8 %len, 0
     br i1 %1, label %end, label %cont
 
 cont:
     ; allocate dest string
-    %dest = alloca [%len x i8]
+    ; under the assumption this is taken care of for now
+    ; %dest = alloca [%len x i8]
 
     ; initialize an iterator at 0
-    %offset = alloc i32
+    %offset = alloca i32
     store i32 0, i32* %offset
+    br label %condit
     
 condit:
     ; store src char in dest
@@ -37,8 +64,8 @@ condit:
     store i8 %char, i8* %str2
     
     ; check if src char is NULL
-    %1 = icmp eq i8 %char, 0
-    br i1 %1, label %end, label %body
+    %2 = icmp eq i8 %char, 0
+    br i1 %2, label %end, label %body
     
 body:
     ; increment the offset variable by 1
@@ -49,5 +76,10 @@ body:
     
 end:
     ; return ptr to copy
-    ret i8 %src
+    ret i8* %src
+}
+
+define i32 @main() {
+
+    ret i32 0
 }
