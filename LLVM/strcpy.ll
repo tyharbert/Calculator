@@ -8,17 +8,17 @@
 declare i32 @puts(i8*)
 
 ; string length function
-define i8 @strlen(i8* %str){
+define i32 @strlen(i8* %str){
 
 ; initialize an iterator at 0
-%offset = alloca i8
-store i8 0, i8* %offset
+%offset = alloca i32
+store i32 0, i32* %offset
 br label %condit
 
 condit:
 ; load the current character
-%idx = load i8* %offset
-%str1 = getelementptr inbounds i8* %str, i8 %idx
+%idx = load i32* %offset
+%str1 = getelementptr inbounds i8* %str, i32 %idx
 %char = load i8* %str1
 
 ; check if the current char is NULL
@@ -27,22 +27,22 @@ br i1 %res, label %end, label %body
 
 body:
 ; increment the offset variable by 1
-%cur_offset = load i8* %offset
-%new_offset = add nsw i8 %cur_offset, 1
-store i8 %new_offset, i8* %offset
+%cur_offset = load i32* %offset
+%new_offset = add nsw i32 %cur_offset, 1
+store i32 %new_offset, i32* %offset
 br label %condit
 
 end:
 ; return the index that the NULL was found at
-ret i8 %idx
+ret i32 %idx
 }
 
 define i8* @strcpy(i8* %dest, i8* %src){
 
     ; get str length
-    %len = call i8 @strlen(i8* %src)
+    %len = call i32 @strlen(i8* %src)
     ; if string length is zero then end
-    %1 = icmp eq i8 %len, 0
+    %1 = icmp eq i32 %len, 0
     br i1 %1, label %end, label %cont
 
 cont:
